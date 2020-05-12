@@ -10,7 +10,7 @@ const {SorteioValidationRules} = require('./Validations/SorteioValidation')
 
 routes.get('/Alunos',AlunoController.index);
 routes.get('/Alunos/:id',AlunoController.get);
-routes.post('/Alunos',AlunoValidationRules(),validate,auth, AlunoController.post);
+routes.post('/Alunos',AlunoValidationRules(),validate, AlunoController.post);
 routes.put('/Alunos/:id', AlunoController.put);
 routes.delete('/Alunos/:id', AlunoController.delete);
 
