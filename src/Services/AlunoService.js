@@ -2,13 +2,16 @@ const Aluno = require('../Models/Aluno')
 
 module.exports ={
 
-    async GET(id) {
+    async get(id) {
         return await Aluno.findOne({_id:id})
     },
-    async POST(aluno){
+    async GetByLogin(Usuario,Senha){
+        return await Aluno.findOne({Login:{Usuario,Senha}})
+    },
+    async post(aluno){
         return await Aluno.create(aluno)
     },
-    async PUT(id,aluno){
+    async put(id,aluno){
         return await Aluno.updateOne({_id:id}, {$set:{
             Nome:aluno.Nome,
             Email:aluno.Email,
@@ -16,7 +19,7 @@ module.exports ={
             Login:aluno.Login
         }})
     },
-    async DELETE (id) {
+    async delete (id) {
         return await Aluno.deleteOne({_id:id})
     },
     async Paginate(page,limit = 2){
