@@ -2,13 +2,13 @@ const Aluno = require('../Models/Aluno')
 
 module.exports ={
 
-    GET = async (id) =>{
+    async GET(id) {
         return await Aluno.findOne({_id:id})
     },
-    POST = async (aluno) =>{
+    async POST(aluno){
         return await Aluno.create(aluno)
     },
-    PUT = async (id,aluno)=>{
+    async PUT(id,aluno){
         return await Aluno.updateOne({_id:id}, {$set:{
             Nome:aluno.Nome,
             Email:aluno.Email,
@@ -16,10 +16,10 @@ module.exports ={
             Login:aluno.Login
         }})
     },
-    DELETE = async (id) =>{
+    async DELETE (id) {
         return await Aluno.deleteOne({_id:id})
     },
-    Paginate = async (page,limit = 2) =>{
+    async Paginate(page,limit = 2){
         return await Aluno.paginate({},{page,limit})
     }
 

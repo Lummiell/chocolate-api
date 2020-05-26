@@ -1,8 +1,8 @@
-const Aluno = require('../Models/Aluno')
+const service = require('../Services/AlunoService')
 module.exports = {
     async index(request, response) {
         const {page=1} = request.query;
-        const alunos = await Aluno.paginate({},{page,limit:3});
+        const alunos = await service.Paginate(page);
         return response.json(alunos);
     },
     async post(request, response) {
@@ -12,47 +12,28 @@ module.exports = {
             Observacoes,
             Login
         } = request.body;
-        const aluno = await Aluno.create({
-            Nome,
-            Email,
-            Observacoes,
-            Login
-        })
+        const aluno = await service.POST({Nome,Email,Observacoes,Login})
         return response.json(aluno)
     },
     async get(request, response) {
-        const aluno = await Aluno.findOne({
-            _id: request.params.id
-        })
+        const aluno = await service.GET(request.params.id)
         return response.json(aluno)
     },
     async put(request, response) {
-        const alunoReplaced = await Aluno.findOne({
-            _id: request.params.id
-        })
+        const alunoReplaced = await service.GET(request.params.id)
         let aluno = '';
         if (alunoReplaced) {
             const {
                 Nome = alunoReplaced.Nome, Email = alunoReplaced.Email, Observacoes = alunoReplaced.Observacoes, Login = alunoReplaced.Login
             } = request.body
-            aluno = await Aluno.updateOne({
-                _id: request.params.id
-            }, {
-                $set: {
-                    Nome: Nome,
-                    Email: Email,
-                    Observacoes: Observacoes,
-                    Login: Login
-                }
-            })
+            aluno = await service.PUT(request.params.id,{Nome,Email,Observacoes,Login})
         }
         return response.json(aluno);
     },
     async delete(request, response) {
-        const aluno = await Aluno.deleteOne({
-            _id: request.params.id
-        });
+        const aluno = await service.DELETE(request.params.id)
         return response.json(aluno);
     }
+
 
 }
