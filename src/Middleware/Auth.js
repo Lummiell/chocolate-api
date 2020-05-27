@@ -1,11 +1,10 @@
 const jwt = require('jsonwebtoken');
 const Aluno = require('../Models/Aluno')
-const secret = require('./secret')
 
 const auth = async (request, response, next) => {
     try {
         const token = request.header('Authorization').replace('Bearer ', '')
-        const data = jwt.verify(token, secret)
+        const data = jwt.verify(token, process.env.JWT_KEY)
         const user = Aluno.findOne({
             _id: data._id
         })

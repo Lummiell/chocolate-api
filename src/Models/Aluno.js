@@ -1,15 +1,15 @@
-const mongoose = require('mongoose');
-const paginate = require('mongoose-paginate')
+const mongoose = require("mongoose");
+const paginate = require("mongoose-paginate");
 
 const AlunoSchema = new mongoose.Schema({
-    Nome:String,
-    Email:String,
-    Observacoes:String,
-    Login:{
-        Usuario:String,
-        Senha:String
-    }
-})
-AlunoSchema.plugin(paginate)
+  Nome: { type: String, required: true },
+  Email: { type: String, required: true },
+  Observacoes: { type: String, default: "" },
+  Login: {
+    Usuario: { type: String, required: true },
+    Senha: { type: String, required: true },
+  },
+});
+AlunoSchema.plugin(paginate);
 
-module.exports = mongoose.model('Aluno',AlunoSchema);
+module.exports = mongoose.model("Aluno", AlunoSchema);
