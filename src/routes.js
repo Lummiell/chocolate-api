@@ -1,12 +1,12 @@
 const {Router} = require('express');
 const routes = Router();
 const AlunoController = require('./Controllers/AlunoController')
-const SorteioController = require('./Controllers/SorteioController')
+const GrupoController = require('./Controllers/GrupoController')
 const LoginController = require('./Controllers/LoginController')
 const auth = require('./Middleware/Auth')
 const {validate} = require('./Middleware/validator')
 const {AlunoValidationRules} = require('./Validations/AlunoValidation')
-const {SorteioValidationRules} = require('./Validations/SorteioValidation')
+const {GrupoValidationRules} = require('./Validations/GrupoValidation')
 
 routes.get('/Alunos',AlunoController.index);
 routes.get('/Alunos/:id',AlunoController.get);
@@ -14,13 +14,13 @@ routes.post('/Alunos',AlunoValidationRules(),validate, AlunoController.post);
 routes.put('/Alunos/:id', AlunoController.put);
 routes.delete('/Alunos/:id', AlunoController.delete);
 
-routes.get('/Sorteios',SorteioController.index);
-routes.get('/Sorteios/:id',SorteioController.get);
-routes.post('/Sorteios/:id/GerarPares',SorteioController.GerarPares);
-routes.post('/Sorteios/:id/InserirParticipante',SorteioController.InserirParticipante)
-routes.post('/Sorteios',SorteioValidationRules(),validate, SorteioController.post);
-routes.put('/Sorteios/:id', SorteioController.put);
-routes.delete('/Sorteios/:id', SorteioController.delete);
+routes.get('/Grupos',GrupoController.index);
+routes.get('/Grupos/:id',GrupoController.get);
+routes.post('/Grupos/:id/GerarPares',GrupoController.GerarPares);
+routes.post('/Grupos/:id/InserirParticipante',GrupoController.InserirParticipante)
+routes.post('/Grupos',GrupoValidationRules(),validate, GrupoController.post);
+routes.put('/Grupos/:id', GrupoController.put);
+routes.delete('/Grupos/:id', GrupoController.delete);
 
 routes.post('/Login/GerarToken',LoginController.GerarToken)
 module.exports = routes;

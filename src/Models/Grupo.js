@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const paginate = require("mongoose-paginate");
-const SorteioSchema = new mongoose.Schema({
-  CriadoEm: { type: Date, default: new Date() },
+const GrupoSchema = new mongoose.Schema({
+  CriadoEm: { type: Date, default: new Date().toUTCString() },
   DataEncontro: { type: Date, required: true },
   Titulo: { type: String, required: true },
   Descricao: { type: String, default: "" },
@@ -30,5 +30,5 @@ const SorteioSchema = new mongoose.Schema({
     default: [],
   },
 });
-SorteioSchema.plugin(paginate);
-module.exports = mongoose.model("Sorteio", SorteioSchema);
+GrupoSchema.plugin(paginate);
+module.exports = mongoose.model("Grupo", GrupoSchema);

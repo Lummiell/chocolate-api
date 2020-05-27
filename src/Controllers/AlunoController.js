@@ -12,8 +12,14 @@ module.exports = {
             Observacoes,
             Login
         } = request.body;
-        const aluno = await service.post({Nome,Email,Observacoes,Login})
-        return response.json(aluno)
+
+        const alunoResponse = await service.post({
+            Nome,
+            Email,
+            Observacoes,
+            Login
+        })
+        return response.json(alunoResponse)
     },
     async get(request, response) {
         const aluno = await service.get(request.params.id)
