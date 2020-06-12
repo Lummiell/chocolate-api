@@ -2,8 +2,17 @@ const GrupoService = require("../Services/GrupoService");
 const AlunoService = require("../Services/AlunoService");
 module.exports = {
   async index(request, response) {
+    if(request.query.Participante){
+      const busca = await GrupoService.filterParticipante(request.query.Participante);
+      return response.json(busca)
+    }
+    if(request.query.Criador){
+      const busca = await GrupoService.filterCriador(request.query.Criador);
+      return response.json(busca)
+    }
+    console.log('saiu')
     const { page = 1 } = request.query;
-    const grupos = await GrupoService.paginate(page);
+    const grupos = await GrupoService.paginate(page,5);
     return response.json(grupos);
   },
   async post(request, response) {

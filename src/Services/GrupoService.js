@@ -1,13 +1,18 @@
 const Grupo = require("../Models/Grupo");
-//const alunoService = require("../Services/AlunoService");
 module.exports = {
   async get(id) {
     return await Grupo.findOne({ _id: id });
   },
-  async paginate(page, limit =2){
-      return await Grupo.paginate({}, { page, limit });
-  }
-  ,
+  async paginate(page, limit) {
+    return await Grupo.paginate({}, { page, limit });
+  },
+  async filterParticipante(IDparticipante) {
+    console.log({IDParticipante:IDparticipante})
+    return await Grupo.find({ Participantes: IDparticipante });
+  },
+  async filterCriador(IDCriador) {
+    return await Grupo.find({Criador:IDCriador});
+  },
   async post(grupo) {
     return await Grupo.create(grupo);
   },
@@ -21,7 +26,7 @@ module.exports = {
           Descricao: grupo.Descricao,
           ValorMin: grupo.ValorMin,
           ValorMax: grupo.ValorMax,
-          Participantes:grupo.Participantes
+          Participantes: grupo.Participantes,
         },
       }
     );
