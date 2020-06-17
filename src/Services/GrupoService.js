@@ -13,6 +13,9 @@ module.exports = {
   async filterCriador(IDCriador) {
     return await Grupo.find({Criador:IDCriador});
   },
+  async filterTitulo(titulo,page,limit=5){
+    return await Grupo.paginate({Titulo: new RegExp(titulo,'i') },{page,limit});
+  },
   async post(grupo) {
     return await Grupo.create(grupo);
   },
