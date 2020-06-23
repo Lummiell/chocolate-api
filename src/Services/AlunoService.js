@@ -5,6 +5,10 @@ module.exports ={
     async get(id) {
         return await Aluno.findOne({_id:id})
     },
+    async getRestricted(id){
+        let retorno = await Aluno.findOne({_id:id}).select('-Login')
+        return retorno;
+    },
     async GetByLogin(Usuario,Senha){
         return await Aluno.findOne({Login:{Usuario,Senha}})
     },

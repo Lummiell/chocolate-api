@@ -1,7 +1,17 @@
 const Grupo = require("../Models/Grupo");
+const { populate } = require("../Models/Grupo");
 module.exports = {
   async get(id) {
     return await Grupo.findOne({ _id: id });
+  },
+  async getRestricted(id){
+    let retorno = await Grupo.findOne({_id:id})
+    .populate('Criador','Nome _id')
+    .populate('Participantes','Nome _id')
+    .populate('Pares.Destinatario', 'Nome _id')
+    .populate('Pares.Remetente','Nome _id').exec();
+    return retorno;
+    
   },
   async paginate(page, limit) {
     return await Grupo.paginate({}, { page, limit });
