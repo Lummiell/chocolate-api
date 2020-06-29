@@ -9,6 +9,7 @@ const AlunoSchema = new mongoose.Schema({
     Usuario: { type: String, required: true },
     Senha: { type: String, required: true },
   },
+  Desejos:[String]
 });
 AlunoSchema.plugin(paginate);
 

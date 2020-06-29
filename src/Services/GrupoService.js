@@ -1,5 +1,5 @@
 const Grupo = require("../Models/Grupo");
-const { populate } = require("../Models/Grupo");
+
 module.exports = {
   async get(id) {
     return await Grupo.findOne({ _id: id });

@@ -1,4 +1,5 @@
-const Aluno = require('../Models/Aluno')
+const Aluno = require('../Models/Aluno');
+const { updateDesejos } = require('../Controllers/AlunoController');
 
 module.exports ={
 
@@ -28,6 +29,11 @@ module.exports ={
     },
     async Paginate(page,limit = 2){
         return await Aluno.paginate({},{page,limit})
+    },
+    async updateDesejos(id,Lista){
+        return await Aluno.updateOne({_id:id},{$set:{
+            Desejos:Lista
+        }})
     }
 
 }
